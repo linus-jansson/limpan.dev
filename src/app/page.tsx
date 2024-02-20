@@ -2,7 +2,7 @@ import { Separator } from "@/components/ui/separator"
 
 
 
-export const Footer = () => {
+const Footer = () => {
     return (
         <footer className="sticky bottom-0">
             <Separator/>
