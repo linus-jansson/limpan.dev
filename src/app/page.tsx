@@ -4,9 +4,9 @@ import { Separator } from "@/components/ui/separator"
 
 const Footer = () => {
     return (
-        <footer className="sticky bottom-0">
+        <footer className="sticky bottom-0 p-6">
             <Separator/>
-            <div className="flex h-5 items-center space-x-3 text-sm justify-center">
+            <div className="flex h-5 items-center space-x-3 text-sm justify-center pt-4">
                 <span>{'🍞'}</span>
                 <span>{new Date().getFullYear()}</span>
                 <Separator orientation="vertical" /> 
