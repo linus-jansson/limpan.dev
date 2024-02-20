@@ -7,7 +7,7 @@ export const Footer = () => {
         <footer className="sticky bottom-0">
             <Separator/>
             <div className="flex h-5 items-center space-x-3 text-sm justify-center">
-                <span>Limpan {'🍞'}</span>
+                <span>{'🍞'}</span>
                 <span>{new Date().getFullYear()}</span>
                 <Separator orientation="vertical" /> 
                 <ul className="flex space-x-2">
