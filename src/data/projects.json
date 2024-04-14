@@ -1,0 +1,28 @@
+[
+    {
+        "id": 1,
+        "title": "valentines  special",
+        "github": "https://github.com/linus-jansson/bliminfv.nu",
+        "demo": "https://bliminfv-nu-5n1w.vercel.app/"
+    },
+    {
+        "id": 2,
+        "title": "Adminnärvaro",
+        "description": "A full stack web application for seeing the attendence of the personeel at NTI gymnasiet. Built with Next.js, JWT, Socket.io, Express.js, tailwindcss and Mongodb. The application also has an built in API that being used by a raspberry pico W to update the attendence for a person with a button press.",
+        "github": "https://github.com/NTIG-Uppsala/admin-narvaro"
+    },
+    {
+        "id": 3,
+        "type": "C#",
+        "title": "Point of Sale system",
+        "description": "A POS system for hotels. Built with c# and winforms. Uses NUnit for unit testing.",
+        "github": "https://github.com/NTIG-Uppsala/hotell-kassasystem"
+    },
+    {
+        "id": 4,
+        "type": "Python",
+        "title": "BTD6 farmer",
+        "description": "A macro system for the game Bloons td 6. Relies on OCR with tesseract and template matching with opencv for navigation and interacting with the game.",
+        "github": "https://github.com/linus-jansson/btd6farmer"
+    }
+]
