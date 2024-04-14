@@ -33,7 +33,7 @@ const Projects = () => projects.map(project => {
 });
 
 const Cc = () => {
-    return (<p className="text-sm tracking-widest">Made with 🍞 by <span className="font-bold">l1mpan</span></p>);
+    return (<p className="text-sm tracking-widest">Made with 🍞 by <span className="font-bold">l1mpan</span><sup> {new Date().getFullYear()}</sup></p>);
 }
 
 const Main = () => {
