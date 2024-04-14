@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 
 import { GeistSans } from 'geist/font/sans';
 export const metadata: Metadata = {
-    title: 'Limpan\'s Portfolio',
+    title: 'Limpan | Software Developer Portfolio',
     description: 'Get to know Limpan, a software developer from Sweden. Check what what I’m currently working on!',
     openGraph: {
         type: 'website',
