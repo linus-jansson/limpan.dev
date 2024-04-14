@@ -38,7 +38,7 @@ const Cc = () => {
 
 const Main = () => {
     return (
-        <main className="px-6 pt-8">
+        <main className="px-6 pt-8 md:pt-16">
             <div className="flex flex-col px-4 scroll-mt-12 lg:flex-row md:px-6">
                 <div className="flex flex-col h-full md:fixed md:overflow-y-hidden md:w-1/3">
                     <div className="">
