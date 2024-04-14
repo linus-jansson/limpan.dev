@@ -3,20 +3,15 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 
 import { GeistSans } from 'geist/font/sans';
-import { GeistMono } from 'geist/font/mono';
-import { Footer } from "@/components/footer";
-import { Hamburger, HamburgerBody, HamburgerFooter, PopoutMenu } from "@/components/header";
-import { Email, Github } from "@/components/icons";
-import { FileLock2, Lock } from "lucide-react";
 export const metadata: Metadata = {
-    title: '...',
-    description: '...',
+    title: 'Limpan - Software Developer | Sweden',
+    description: 'Get to know Limpan, a software developer from Sweden. Check what what I’m currently working on!',
     openGraph: {
         type: 'website',
-        title: '...',
-        description: '...',
+        title: 'Limpan - Software Developer | Sweden',
+        description: 'Get to know Limpan, a software developer from Sweden. Check what what I’m currently working on!',
         url: 'https://limpan.dev/',
-        images: '...',
+        images: 'https://limpan.dev/bg.png',
     },
     other: {
         'theme-color': '#18181B',
