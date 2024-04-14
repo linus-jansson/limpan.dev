@@ -46,7 +46,7 @@ const Main = () => {
                         <section className="pt-4 mb-6 space-y-2 text-lg" id="about">
                             <p className="font-bold">Software developer from Sweden!</p>
                             <p>My fascination with computers began in childhood, nurtured by countless hours of gaming. This hobby eventually evolved into a dedicated interest in software development, with a particular focus on full-stack development.</p>
-                            <p>In addition to my professional work, I contribute to open-source projects in my free time, which are publicly available on <a href="https://github.com/linus-jansson" className="font-semibold underline text-primary">Github</a></p>
+                            <p>In addition to my professional work, I work on open-source projects in my free time, which are publicly available on <a href="https://github.com/linus-jansson" className="font-semibold underline text-primary">Github</a></p>
                             <p>Feel free to reach out to!</p>
                         </section>
                     </div>
