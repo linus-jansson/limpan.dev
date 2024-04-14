@@ -40,8 +40,8 @@ const Main = () => {
     return (
         <main className="px-6 pt-8">
             <div className="flex flex-col px-4 scroll-mt-12 lg:flex-row md:px-6">
-                <div className="flex flex-col h-full justify-evenly md:fixed md:overflow-y-hidden md:w-1/3">
-                    <div className="md:-mt-14">
+                <div className="flex flex-col h-full md:fixed md:overflow-y-hidden md:w-1/3">
+                    <div className="">
                         <h1 className="text-5xl font-bold">Hello, I am <span className="tracking-widest text-primary">Limpan!</span> Thanks for visiting my page!</h1>
                         <section className="pt-4 mb-6 space-y-2 text-lg" id="about">
                             <p className="font-bold">Software developer from Sweden!</p>
@@ -50,7 +50,7 @@ const Main = () => {
                             <p>Feel free to reach out to!</p>
                         </section>
                     </div>
-                    <div className="hidden md:block">
+                    <div className="hidden mt-auto mb-24 md:block">
                         <Cc />
                     </div>
                 </div>
