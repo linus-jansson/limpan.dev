@@ -27,9 +27,9 @@ export const Blob: React.FC = () => {
 
 
     return (
-        <div>
+        <>
             <div className={styles.blob_blur}></div>
             <div ref={blobRef} className={styles.blob}></div>
-        </div>
+        </>
     );
 };

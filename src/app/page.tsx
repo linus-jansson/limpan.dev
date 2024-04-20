@@ -39,8 +39,8 @@ const Cc = () => {
 
 const Main = () => {
     return (
-        <main className="px-6 pt-8 md:pt-16 z-[100] relative">
-            <div className="flex flex-col px-4 scroll-mt-12 lg:flex-row md:px-6 relative">
+        <main className="px-6 pt-8 md:pt-16 relative z-[9999]">
+            <div className="flex flex-col px-4 scroll-mt-12 lg:flex-row md:px-6">
                 {/* fixed */}
                 <div className="flex flex-col h-full md:fixed md:overflow-y-hidden md:w-1/3">
                     <div className="">
@@ -84,6 +84,5 @@ export default function Home() {
             </footer>
             {/* <Blob /> */}
         </>
-
     );
 }
