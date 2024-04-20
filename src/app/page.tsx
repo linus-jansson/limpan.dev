@@ -3,6 +3,7 @@ import { Project, ProjectDescription, ProjectLink, ProjectLinks, ProjectTags, Pr
 import { Link } from "lucide-react";
 import projects from "@/data/projects.json" assert { type: "json" };
 import { PopoutMenu } from "@/components/header";
+import { Blob } from "@/components/blob";
 
 const Divider = ({ children }: { children: React.ReactNode }) => {
     return <div className="divider">{children}</div>;
@@ -38,8 +39,9 @@ const Cc = () => {
 
 const Main = () => {
     return (
-        <main className="px-6 pt-8 md:pt-16">
-            <div className="flex flex-col px-4 scroll-mt-12 lg:flex-row md:px-6">
+        <main className="px-6 pt-8 md:pt-16 z-[100] relative">
+            <div className="flex flex-col px-4 scroll-mt-12 lg:flex-row md:px-6 relative">
+                {/* fixed */}
                 <div className="flex flex-col h-full md:fixed md:overflow-y-hidden md:w-1/3">
                     <div className="">
                         <h1 className="text-5xl font-bold">Hello, I am <span className="tracking-widest text-primary">Limpan!</span> Thanks for visiting my page!</h1>
@@ -54,6 +56,7 @@ const Main = () => {
                         <Cc />
                     </div>
                 </div>
+                {/* scrollable */}
                 <div className="md:w-2/3 md:ml-auto md:pr-12 md:pl-48 mb-12 w-full max-w-[1024px]">
                     <section id="projects" className="mb-6">
                         <Divider>
@@ -76,9 +79,10 @@ export default function Home() {
     return (
         <>
             <Main />
-            <footer className="static w-full py-2 text-center md:hidden">
+            <footer className="w-full py-2 text-center md:hidden">
                 <Cc />
             </footer>
+            {/* <Blob /> */}
         </>
 
     );
