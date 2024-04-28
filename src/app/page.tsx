@@ -49,7 +49,7 @@ const Main = () => {
                             <p className="font-bold">Software developer from Sweden!</p>
                             <p>My fascination with computers began in childhood, nurtured by countless hours of gaming. This hobby eventually evolved into a dedicated interest in software development, with a particular focus on full-stack development.</p>
                             <p>In addition to my professional work, I work on open-source projects in my free time, which are publicly available on <a href="https://github.com/linus-jansson" className="font-semibold underline text-primary">Github</a></p>
-                            <p>Feel free to reach out to!</p>
+                            <p>Feel free to reach out too!</p>
                         </section>
                     </div>
                     <div className="hidden mt-auto mb-24 md:block">
