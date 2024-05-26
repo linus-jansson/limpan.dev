@@ -2,11 +2,26 @@
 import { contactSchema } from "@/lib/contactSchema";
 import { getMessageTemplate, sendDiscordWebhook } from "@/lib/discord";
 import { generateVibrantColor } from "@/lib/utils";
+import { Ratelimit } from "@upstash/ratelimit"; // for deno: see above
+import { Redis } from "@upstash/redis"; // see below for cloudflare and fastly adapters
+
 
 const DcWebhook = process.env.DISCORD_WEBHOOK_URL!;
 
+const ratelimit = new Ratelimit({
+    redis: Redis.fromEnv(),
+    limiter: Ratelimit.slidingWindow(5, "1h"),
+    analytics: true,
+    /**
+     * Optional prefix for the keys used in redis. This is useful if you want to share a redis
+     * instance with other applications and want to avoid key collisions. The default prefix is
+     * "@upstash/ratelimit"
+     */
+    prefix: "contact-form-ratelimit",
+  });
 
 import type { TurnstileServerValidationResponse } from '@marsidev/react-turnstile'
+import { FORCE_RATE_LIMIT } from "@/lib/settings";
 
 const verifyEndpoint = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
 const secret = process.env.CF_SECRET!;
@@ -41,6 +56,23 @@ async function verifyCaptchea(token: string) {
 
 
 export async function POST(request: Request) {
+    // Get request IP
+    const identifier = (request.headers.get('x-forwarded-for') ?? '127.0.0.1').split(',')[0];
+    console.log("Post from", identifier);
+    // Only rate limit in production
+    if (process.env.NODE_ENV !== 'development' || FORCE_RATE_LIMIT) {
+        const { success } = await ratelimit.limit(identifier);
+
+        if (!success) {
+            return new Response("Rate limit exceeded", {
+                status: 429,
+                headers: {
+                    "Content-Type": "text/plain",
+                },
+            });
+        }
+    }
+
     const request_body = await request.json()
     const parsed_body = contactSchema.safeParse(request_body);
 

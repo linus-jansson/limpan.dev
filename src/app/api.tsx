@@ -18,10 +18,17 @@ export async function sendMessage(formData: Record<string, any>): Promise<string
         },
         body: JSON.stringify(formData),
     });
-    if (!response.ok) {
+    // check if rate limited 
+    if (response.status === 429) {
+        return Promise.reject(new Error('Seems like you are sending too many messages, try again later'));
+    }
+    else if (!response.ok) {
+        // anything else erroring
         return Promise.reject(new Error('Failed to send message'));
     }
-    return Promise.resolve("Message sent!");
+    else {
+        return Promise.resolve("Message sent!");
+    }
 }
 
 export async function acceptCookies() {

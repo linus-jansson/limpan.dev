@@ -23,11 +23,13 @@ import { Textarea } from "@/components/ui/textarea";
 
 import { Turnstile } from '@marsidev/react-turnstile'
 import { z } from "zod";
+import { cn } from "@/lib/utils";
 
 export function ContactForm({cookiesAccepted}: {cookiesAccepted: boolean}) {
     const turnstileRef = useRef()
     const [showSubmit, setShowSubmit] = useState(false)
     const [formMessage, setFormMessage] = useState<null | string>(null)
+    const [postError, setPostError] = useState<boolean>(false)
     const form = useForm<z.infer<typeof contactSchema>>({
         resolver: zodResolver(contactSchema),
         defaultValues: {
@@ -36,15 +38,17 @@ export function ContactForm({cookiesAccepted}: {cookiesAccepted: boolean}) {
     })
 
     function onSubmit(values: z.infer<typeof contactSchema>) {
+        setFormMessage("");
+        setPostError(false);
+
         sendMessage(values)
-            .then((res) => {
-                console.log(res)
-                setFormMessage("Message sent!")
-            })
-            .catch(() => {
-                setFormMessage("Failed to send message")
+            .then(() => setFormMessage("Message sent!"), (error) => {
+                setPostError(true);
+                setFormMessage(error.message);
             })
     }
+    // Disable submit button if form is submitting, submit is successful, or there is an not an error
+    const shouldDisableSubmit = form.formState.isSubmitting || (form.formState.isSubmitSuccessful && !postError);
 
     return (
         <>
@@ -133,11 +137,15 @@ export function ContactForm({cookiesAccepted}: {cookiesAccepted: boolean}) {
                         />
                     }
 
-                    {formMessage && <FormMessage className="text-primary">{formMessage}</FormMessage>}
+                    {formMessage && 
+                        <FormMessage 
+                            className={cn((!postError) ? 'text-primary' : 'text-error')}
+                        >{formMessage}
+                        </FormMessage>}
                     {showSubmit && <Button 
                         type="submit"
                         className="text-primary-content"
-                        disabled={form.formState.isSubmitting || form.formState.isSubmitSuccessful}
+                        disabled={shouldDisableSubmit}
                     >Submit</Button>}
                 </form>
             </Form>
