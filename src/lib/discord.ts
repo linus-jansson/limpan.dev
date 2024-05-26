@@ -16,7 +16,7 @@ type DiscordWebhookStructure = {
     }[];
 };
 
-type WebookReturn = Promise<void> | Promise<Error>
+type WebookReturn = Promise<void | Error>
 
 const generateWebhookJson = ({
     content,
@@ -60,7 +60,7 @@ export const getMessageTemplate = ({name, subject, email, message, color}: Messa
 })
 
 
-export const sendDiscordWebhook = async (webhook_url: string, data: Record<string, any>) : WebookReturn => {
+export const sendDiscordWebhook = async (webhook_url: string, data: Record<string, any>) : Promise<void> => {
     const res = await fetch(webhook_url, {
         method: 'POST',
         headers: {

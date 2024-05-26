@@ -22,6 +22,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea";
 
 import { Turnstile } from '@marsidev/react-turnstile'
+import { z } from "zod";
 
 export function ContactForm({cookiesAccepted}: {cookiesAccepted: boolean}) {
     const turnstileRef = useRef()
