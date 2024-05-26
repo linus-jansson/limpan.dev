@@ -5,29 +5,22 @@ import { generateVibrantColor } from "@/lib/utils";
 import { Ratelimit } from "@upstash/ratelimit"; // for deno: see above
 import { Redis } from "@upstash/redis"; // see below for cloudflare and fastly adapters
 
-
-const DcWebhook = process.env.DISCORD_WEBHOOK_URL!;
+import type { TurnstileServerValidationResponse } from '@marsidev/react-turnstile'
+import { FORCE_RATE_LIMIT } from "@/lib/settings";
+import { CF_VERIFY_URL, RATE_LIMIT, RATE_LIMIT_DURATION } from "@/lib/constants";
 
 const ratelimit = new Ratelimit({
     redis: Redis.fromEnv(),
-    limiter: Ratelimit.slidingWindow(5, "1h"),
+    limiter: Ratelimit.slidingWindow(RATE_LIMIT, RATE_LIMIT_DURATION),
     analytics: true,
-    /**
-     * Optional prefix for the keys used in redis. This is useful if you want to share a redis
-     * instance with other applications and want to avoid key collisions. The default prefix is
-     * "@upstash/ratelimit"
-     */
     prefix: "contact-form-ratelimit",
-  });
+});
 
-import type { TurnstileServerValidationResponse } from '@marsidev/react-turnstile'
-import { FORCE_RATE_LIMIT } from "@/lib/settings";
+const CF_SECRET = process.env.CF_SECRET!;
+const DC_WEBHOOK = process.env.DISCORD_WEBHOOK_URL!;
 
-const verifyEndpoint = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
-const secret = process.env.CF_SECRET!;
-
-async function verifyCaptchea(token: string) {
-    if (!token) {
+async function verifyCaptchea(cf_verification_token: string) {
+    if (!cf_verification_token) {
         return new Response('No token provided', {
             status: 400,
             headers: {
@@ -36,22 +29,22 @@ async function verifyCaptchea(token: string) {
         })
     }
 
-  const res = await fetch(verifyEndpoint, {
-    method: 'POST',
-    body: `secret=${encodeURIComponent(secret)}&response=${encodeURIComponent(token)}`,
-    headers: {
-      'content-type': 'application/x-www-form-urlencoded'
-    }
-  })
+    const res = await fetch(CF_VERIFY_URL, {
+        method: 'POST',
+        body: `secret=${encodeURIComponent(CF_SECRET)}&response=${encodeURIComponent(cf_verification_token)}`,
+        headers: {
+            'content-type': 'application/x-www-form-urlencoded'
+        }
+    })
 
-  const data = (await res.json()) as TurnstileServerValidationResponse
-  console.log("Captchea verification", data)
-  return new Response(JSON.stringify(data), {
-    status: data.success ? 200 : 400,
-    headers: {
-      'content-type': 'application/json'
-    }
-  })
+    const data = (await res.json()) as TurnstileServerValidationResponse
+    console.log("Captchea verification", data)
+    return new Response(JSON.stringify(data), {
+        status: data.success ? 200 : 400,
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
 }
 
 
@@ -82,7 +75,7 @@ export async function POST(request: Request) {
         console.log(isCaptcha.status, isCaptcha.statusText, isCaptcha.body)
         return isCaptcha;
     }
-    
+
     try {
         if (!parsed_body.success) {
             return new Response(parsed_body.error.message, {
@@ -98,10 +91,10 @@ export async function POST(request: Request) {
             subject: parsed_body.data?.subject,
             email: parsed_body.data?.email,
             message: parsed_body.data.message,
-            color: parsed_body.data?.color
+            color: generateVibrantColor(),
         });
 
-        await sendDiscordWebhook(DcWebhook, template);
+        await sendDiscordWebhook(DC_WEBHOOK, template);
 
         return new Response(null, {
             status: 201,
