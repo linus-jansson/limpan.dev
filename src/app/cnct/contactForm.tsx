@@ -24,6 +24,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Turnstile } from '@marsidev/react-turnstile'
 import { z } from "zod";
 import { cn } from "@/lib/utils";
+import { CF_SITE_KEY } from "@/lib/constants";
 
 export function ContactForm({cookiesAccepted}: {cookiesAccepted: boolean}) {
     const turnstileRef = useRef()
@@ -136,7 +137,7 @@ export function ContactForm({cookiesAccepted}: {cookiesAccepted: boolean}) {
                                 <Turnstile 
                                     {...field} 
                                     ref={turnstileRef}
-                                    siteKey='0x4AAAAAAAbHUo0eEimYDKYL'
+                                    siteKey={CF_SITE_KEY}
                                     onSuccess={(token) => {
                                         field.onChange(token);
                                         setShowSubmit(true);
