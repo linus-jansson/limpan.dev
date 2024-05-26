@@ -50,7 +50,17 @@ async function verifyCaptchea(cf_verification_token: string) {
 
 export async function POST(request: Request) {
     // Get request IP
-    const identifier = (request.headers.get('x-forwarded-for') ?? '127.0.0.1').split(',')[0];
+    const { searchParams } = new URL(request.url)
+    const identifier = searchParams.get('identifier')
+    if (!identifier) {
+        return new Response("No identifier provided", {
+            status: 400,
+            headers: {
+                "Content-Type": "text/plain",
+            },
+        });
+    }
+    
     console.log("Post from", identifier);
     // Only rate limit in production
     if (process.env.NODE_ENV !== 'development' || FORCE_RATE_LIMIT) {

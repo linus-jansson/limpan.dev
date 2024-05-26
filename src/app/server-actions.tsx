@@ -2,6 +2,7 @@
 "use server";
 import { COOKIES_ACCEPTED_COOKIE, ERROR_SENDING_MESSAGE, MESSAGE_SENT, RATE_LIMIT_EXCEEDED } from '@/lib/constants';
 import { cookies } from 'next/headers'
+import { headers } from "next/headers";
 
 
 const HOST_URL = process.env.HOST_URL!;
@@ -17,7 +18,8 @@ type MessageResponse = {
 export async function sendMessage(formData: Record<string, any>): Promise<MessageResponse> {
     "use server";
     console.log(formData)
-    const response = await fetch(HOST_URL + '/cnct/send', {
+    const identifier = (headers().get('x-forwarded-for') ?? '127.0.0.1').split(',')[0];
+    const response = await fetch(HOST_URL + `/cnct/send?identifier=${identifier}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
