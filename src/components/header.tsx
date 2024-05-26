@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Email, Github } from "./icons";
 import { FileLock2 } from "lucide-react";
 
@@ -24,13 +25,13 @@ export function PopoutMenu() {
                         </a>
                     </li>
                     <li>
-                        <a className="tooltip tooltip-left"
-                            data-tip="Email"
-                            href="mailto:contact+362636@limpan.dev"
+                        <Link className="tooltip tooltip-left"
+                            data-tip="Contact"
+                            href="cnct"
                         >
                             <Email/>
                             <span className="visually-hidden">Contact me on email</span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
                         <a className="tooltip tooltip-left"

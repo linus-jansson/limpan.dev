@@ -1,0 +1,1 @@
+export const COOKIES_ACCEPTED_COOKIE = "cookies-accepted";
