@@ -1,6 +1,6 @@
 "use client"
 import { FormEvent, useCallback, useState } from "react"
-import { acceptCookies } from "../api"
+import { acceptCookies } from "../server-actions"
 
 export const CookieBanner = ({cookiesAccepted}: {cookiesAccepted: boolean}) => {
     const [show, setShow] = useState(!cookiesAccepted)

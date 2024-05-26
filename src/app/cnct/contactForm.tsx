@@ -1,7 +1,7 @@
 
 "use client";
 
-import { sendMessage } from "../api";
+import { sendMessage } from "../server-actions";
 import { useRef, useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -42,10 +42,19 @@ export function ContactForm({cookiesAccepted}: {cookiesAccepted: boolean}) {
         setPostError(false);
 
         sendMessage(values)
-            .then(() => setFormMessage("Message sent!"), (error) => {
-                setPostError(true);
-                setFormMessage(error.message);
+            .then((res) => {
+                if (!res.ok) {
+                    setPostError(true);
+                    setFormMessage(res.message);
+                    return;
+                }
+
+                setFormMessage("Message sent!")
             })
+            .catch((err) => {
+                setPostError(true);
+                setFormMessage("Error sending message, try again later");
+            });
     }
     // Disable submit button if form is submitting, submit is successful, or there is an not an error
     const shouldDisableSubmit = form.formState.isSubmitting || (form.formState.isSubmitSuccessful && !postError);

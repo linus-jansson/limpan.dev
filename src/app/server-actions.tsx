@@ -1,14 +1,20 @@
 
 "use server";
-import { COOKIES_ACCEPTED_COOKIE } from '@/lib/constants';
+import { COOKIES_ACCEPTED_COOKIE, ERROR_SENDING_MESSAGE, MESSAGE_SENT, RATE_LIMIT_EXCEEDED } from '@/lib/constants';
 import { cookies } from 'next/headers'
 
 
 const HOST_URL = process.env.HOST_URL!;
 
+type MessageResponse = {
+    ok: boolean;
+    message: string;
+    code?: number;
+}
+
 // Todo: make a type for the form data
 // maybe create a lib with types to use to send webhooks :)
-export async function sendMessage(formData: Record<string, any>): Promise<string> {
+export async function sendMessage(formData: Record<string, any>): Promise<MessageResponse> {
     "use server";
     console.log(formData)
     const response = await fetch(HOST_URL + '/cnct/send', {
@@ -19,16 +25,17 @@ export async function sendMessage(formData: Record<string, any>): Promise<string
         body: JSON.stringify(formData),
     });
     // check if rate limited 
-    if (response.status === 429) {
-        return Promise.reject(new Error('Seems like you are sending too many messages, try again later'));
+    if (!response.ok) {
+        return {
+            ok: false,
+            message: response.status === 429 ? RATE_LIMIT_EXCEEDED : ERROR_SENDING_MESSAGE,
+        };
     }
-    else if (!response.ok) {
-        // anything else erroring
-        return Promise.reject(new Error('Failed to send message'));
-    }
-    else {
-        return Promise.resolve("Message sent!");
-    }
+
+    return {
+        ok: true,
+        message: MESSAGE_SENT,
+    };
 }
 
 export async function acceptCookies() {
