@@ -11,11 +11,11 @@ export default function Page() {
     const hasCookie = cookieStore.has(COOKIES_ACCEPTED_COOKIE)
     return (
         <>
-            <header className="py-8 container mx-auto">
+            <header className="py-8 container mx-auto px-8 md:px-0 space-y-4">
                 <h1 className="text-4xl font-bold">Contact</h1>
                 <Link href="/" className="underline flex gap-3 w-fit hover:text-primary/95"><ArrowLeft/>Return Back home</Link>
             </header>
-            <section className="container mx-auto">
+            <section className="container mx-auto px-8 md:px-0">
                 <ContactForm cookiesAccepted={hasCookie} />
             </section>
             <CookieBanner cookiesAccepted={hasCookie} />

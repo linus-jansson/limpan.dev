@@ -57,8 +57,10 @@ export function ContactForm({cookiesAccepted}: {cookiesAccepted: boolean}) {
                 setFormMessage("Error sending message, try again later");
             });
     }
-    // Disable submit button if form is submitting, submit is successful, or there is an not an error
-    const shouldDisableSubmit = form.formState.isSubmitting || (form.formState.isSubmitSuccessful && !postError);
+    // Disable submit button if form is submitting, submit is successful, or there is an not an error, or cookies not accepted
+    const shouldDisableForm = form.formState.isSubmitting || 
+        (form.formState.isSubmitSuccessful && !postError) || 
+        !cookiesAccepted;
 
     return (
         <>
@@ -72,7 +74,7 @@ export function ContactForm({cookiesAccepted}: {cookiesAccepted: boolean}) {
                                 <FormItem className="w-full">
                                     <FormLabel>Name</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="Limpan" {...field} />
+                                        <Input placeholder="Limpan" disabled={shouldDisableForm} {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -86,11 +88,8 @@ export function ContactForm({cookiesAccepted}: {cookiesAccepted: boolean}) {
                                 <FormItem className="w-full">
                                     <FormLabel>Email</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="Email address" type="email" {...field} />
+                                        <Input placeholder="Email address" type="email" disabled={shouldDisableForm} {...field} />
                                     </FormControl>
-                                    <FormDescription>
-                                        Your preferred email address
-                                    </FormDescription>
                                     <FormMessage />
                                 </FormItem>
                             )}
@@ -104,7 +103,7 @@ export function ContactForm({cookiesAccepted}: {cookiesAccepted: boolean}) {
                             <FormItem>
                                 <FormLabel>Subject</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="Whats on your mind?" {...field} />
+                                    <Input placeholder="Whats on your mind?" disabled={shouldDisableForm} {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -119,11 +118,8 @@ export function ContactForm({cookiesAccepted}: {cookiesAccepted: boolean}) {
                             <FormItem>
                             <FormLabel>Message (required)</FormLabel>
                             <FormControl>
-                                <Textarea placeholder="Hello!" {...field} />
+                                <Textarea placeholder="Hello!" disabled={shouldDisableForm} {...field} />
                             </FormControl>
-                            <FormDescription>
-                                This is the message you want to send.
-                            </FormDescription>
                             <FormMessage />
                             </FormItem>
                         )}
@@ -146,17 +142,17 @@ export function ContactForm({cookiesAccepted}: {cookiesAccepted: boolean}) {
                             )}
                         />
                     }
-
+                    
                     {formMessage && 
                         <FormMessage 
                             className={cn((!postError) ? 'text-primary' : 'text-error')}
                         >{formMessage}
                         </FormMessage>}
-                    {showSubmit && <Button 
+                    <Button 
                         type="submit"
                         className="text-primary-content"
-                        disabled={shouldDisableSubmit}
-                    >Submit</Button>}
+                        disabled={shouldDisableForm}
+                    >Submit</Button>
                 </form>
             </Form>
         </>
