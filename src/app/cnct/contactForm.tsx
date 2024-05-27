@@ -62,6 +62,8 @@ export function ContactForm({cookiesAccepted}: {cookiesAccepted: boolean}) {
         (form.formState.isSubmitSuccessful && !postError) || 
         !cookiesAccepted;
 
+    const captchaAccepted = form.watch('token')?.length > 0;
+    console.log(captchaAccepted);
     return (
         <>
             <Form {...form}>
@@ -151,7 +153,7 @@ export function ContactForm({cookiesAccepted}: {cookiesAccepted: boolean}) {
                     <Button 
                         type="submit"
                         className="text-primary-content"
-                        disabled={shouldDisableForm}
+                        disabled={shouldDisableForm || !captchaAccepted}
                     >Submit</Button>
                 </form>
             </Form>
