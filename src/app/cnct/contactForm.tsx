@@ -63,7 +63,7 @@ export function ContactForm({cookiesAccepted}: {cookiesAccepted: boolean}) {
         !cookiesAccepted;
 
     const captchaAccepted = form.watch('token')?.length > 0;
-    console.log(captchaAccepted);
+
     return (
         <>
             <Form {...form}>

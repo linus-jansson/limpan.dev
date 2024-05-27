@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { Email, Github } from "./icons";
 import { FileLock2 } from "lucide-react";
@@ -46,36 +44,4 @@ export function PopoutMenu() {
             </div>
         </header>
     );
-}
-
-// CC: Made by Erik Terwan - MIT License - 24th of November 2015
-export const Hamburger = ({children}: {children?: React.ReactNode}) => {
-    return (
-        <nav role="navigation">
-            <div className="menuToggle">
-                <input type="checkbox" />
-                <span></span>
-                <span></span>
-                <span></span>
-                {children}
-            </div>
-        </nav>
-    );
-}
-
-export const HamburgerBody = ({children}: {children: React.ReactNode}) => {
-    return (
-        <ul className="menu">
-            {children}
-        </ul>
-    )
-}
-
-
-export const HamburgerFooter = ({children}: {children: React.ReactNode}) => {
-    return (
-        <ul className="flex flex-row space-x-4 menu">
-            {children}
-        </ul>
-    )
 }

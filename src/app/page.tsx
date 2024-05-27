@@ -4,6 +4,7 @@ import { Link } from "lucide-react";
 import projects from "@/data/projects.json" assert { type: "json" };
 import { PopoutMenu } from "@/components/header";
 import { Blob } from "@/components/blob";
+import { Cc } from "../components/Cc";
 
 const Divider = ({ children }: { children: React.ReactNode }) => {
     return <div className="divider">{children}</div>;
@@ -33,10 +34,6 @@ const Projects = () => projects.map(project => {
     );
 });
 
-const Cc = () => {
-    return (<p className="text-sm tracking-widest">Made with 🍞 by <span className="font-bold">l1mpan</span><sup> {new Date().getFullYear()}</sup></p>);
-}
-
 const Main = () => {
     return (
         <main className="px-6 pt-8 md:pt-16 relative z-[9999]">
@@ -48,7 +45,7 @@ const Main = () => {
                         <section className="pt-4 mb-6 space-y-2 text-lg" id="about">
                             <p className="font-bold">Software developer from Sweden!</p>
                             <p>My fascination with computers began in childhood, nurtured by countless hours of gaming. This hobby eventually evolved into a dedicated interest in software development, with a particular focus on full-stack development.</p>
-                            <p>In addition to my professional work, I work on open-source projects in my free time, which are publicly available on <a href="https://github.com/linus-jansson" className="font-semibold underline text-primary">Github</a></p>
+                            <p>In addition to my professional work, I work on open-source projects in my free time, which are publicly available on <a href="https://github.com/linus-jansson" className="font-semibold underline text-primary hover:text-primary/75">Github</a></p>
                             <p>Feel free to reach out too!</p>
                         </section>
                     </div>

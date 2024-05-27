@@ -17,7 +17,7 @@ type MessageResponse = {
 // maybe create a lib with types to use to send webhooks :)
 export async function sendMessage(formData: Record<string, any>): Promise<MessageResponse> {
     "use server";
-    console.log(formData)
+    // console.log(formData)
     const identifier = (headers().get('x-forwarded-for') ?? '127.0.0.1').split(',')[0];
     const response = await fetch(HOST_URL + `/cnct/send?identifier=${identifier}`, {
         method: 'POST',
@@ -42,6 +42,6 @@ export async function sendMessage(formData: Record<string, any>): Promise<Messag
 
 export async function acceptCookies() {
     "use server"
-    cookies().set(COOKIES_ACCEPTED_COOKIE, "true")
+    cookies().set(COOKIES_ACCEPTED_COOKIE, "true", { maxAge: 60 * 60 * 24, /* 1 day */ })
     return Promise.resolve("Cookies accepted!");
 }
