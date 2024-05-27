@@ -10,13 +10,13 @@ import { contactSchema } from "@/lib/contactSchema";
 
 import { Button } from "@/components/ui/button"
 import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea";
@@ -26,9 +26,9 @@ import { z } from "zod";
 import { cn } from "@/lib/utils";
 import { CF_SITE_KEY } from "@/lib/constants";
 
-export function ContactForm({cookiesAccepted}: {cookiesAccepted: boolean}) {
+export function ContactForm({ cookiesAccepted }: { cookiesAccepted: boolean }) {
     const turnstileRef = useRef()
-    const [showSubmit, setShowSubmit] = useState(false)
+    const [isSending, setIsSending] = useState(false)
     const [formMessage, setFormMessage] = useState<null | string>(null)
     const [postError, setPostError] = useState<boolean>(false)
     const form = useForm<z.infer<typeof contactSchema>>({
@@ -39,6 +39,7 @@ export function ContactForm({cookiesAccepted}: {cookiesAccepted: boolean}) {
     })
 
     function onSubmit(values: z.infer<typeof contactSchema>) {
+        setIsSending(true);
         setFormMessage("");
         setPostError(false);
 
@@ -55,11 +56,12 @@ export function ContactForm({cookiesAccepted}: {cookiesAccepted: boolean}) {
             .catch((err) => {
                 setPostError(true);
                 setFormMessage("Error sending message, try again later");
-            });
+            })
+            .finally(() => setIsSending(false));
     }
     // Disable submit button if form is submitting, submit is successful, or there is an not an error, or cookies not accepted
-    const shouldDisableForm = form.formState.isSubmitting || 
-        (form.formState.isSubmitSuccessful && !postError) || 
+    const shouldDisableForm = form.formState.isSubmitting ||
+        (form.formState.isSubmitSuccessful && !postError) ||
         !cookiesAccepted;
 
     const captchaAccepted = form.watch('token')?.length > 0;
@@ -111,50 +113,55 @@ export function ContactForm({cookiesAccepted}: {cookiesAccepted: boolean}) {
                             </FormItem>
                         )}
                     />
-                    
+
                     {/* message */}
                     <FormField
                         control={form.control}
                         name="message"
                         render={({ field }) => (
                             <FormItem>
-                            <FormLabel>Message (required)</FormLabel>
-                            <FormControl>
-                                <Textarea placeholder="Hello!" disabled={shouldDisableForm} {...field} />
-                            </FormControl>
-                            <FormMessage />
+                                <FormLabel>Message (required)</FormLabel>
+                                <FormControl>
+                                    <Textarea placeholder="Hello!" disabled={shouldDisableForm} {...field} />
+                                </FormControl>
+                                <FormMessage />
                             </FormItem>
                         )}
                     />
 
-                    {cookiesAccepted && 
+                    {cookiesAccepted &&
                         <FormField
                             control={form.control}
                             name="token"
                             render={({ field }) => (
-                                <Turnstile 
-                                    {...field} 
+                                <Turnstile
+                                    {...field}
                                     ref={turnstileRef}
                                     siteKey={CF_SITE_KEY}
                                     onSuccess={(token) => {
                                         field.onChange(token);
-                                        setShowSubmit(true);
-                                    }} 
+                                    }}
                                 />
                             )}
                         />
                     }
-                    
-                    {formMessage && 
-                        <FormMessage 
+
+                    {formMessage &&
+                        <FormMessage
                             className={cn((!postError) ? 'text-primary' : 'text-error')}
                         >{formMessage}
-                        </FormMessage>}
-                    <Button 
+                        </FormMessage>
+                    }
+
+                    <Button
                         type="submit"
-                        className="text-primary-content"
+                        className="text-primary-content max-w-base"
                         disabled={shouldDisableForm || !captchaAccepted}
                     >Submit</Button>
+
+                    <div>
+                        {isSending && <span className="loading loading-dots loading-lg text-primary"></span>}
+                    </div>
                 </form>
             </Form>
         </>
