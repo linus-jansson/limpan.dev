@@ -42,7 +42,7 @@ type MessageTemplate = {
     encryptedMessage: string;
 }
 
-export const getMessageTemplate = (encryptedMessage: WebStream<string>) => ({
+export const getMessageTemplate = (encryptedMessage: string) => ({
     "username": "Portfoli contact receiver!",
     "avatar_url": "https://i.imgur.com/R66g1Pe.jpg",
     "embeds": [
