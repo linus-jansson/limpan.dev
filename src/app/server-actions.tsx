@@ -15,7 +15,7 @@ import { encryptMessage } from '@/lib/encryption';
 
 const HOST_URL = process.env.HOST_URL!;
 const DC_WEBHOOK = process.env.DISCORD_WEBHOOK_URL!;
-
+const PGP_PUBLIC_KEY_PATH = "limpan.pgp-key.asc.old"
 type MessageResponse = {
     ok: boolean;
     message: string;
@@ -29,6 +29,10 @@ const ratelimit = new Ratelimit({
     prefix: "contact-form-ratelimit",
 });
 
+async function getPublicPgpKey() {
+    const response = await fetch(HOST_URL + '/' + PGP_PUBLIC_KEY_PATH)
+    return response.text();
+}
 
 // Todo: make a type for the form data
 // maybe create a lib with types to use to send webhooks :)
@@ -75,7 +79,7 @@ export async function submitContactForm(formData: Record<string, any>): Promise<
                 message: CAPTCHEA_FAILED
             };
         }
-        const encryptedMessage = await encryptMessage(JSON.stringify(parsed_formdata.data), await getPgpPublicKey())
+        const encryptedMessage = await encryptMessage(JSON.stringify(parsed_formdata.data), await getPublicPgpKey())
         const template = getMessageTemplate(encryptedMessage);
 
         await sendDiscordWebhook(DC_WEBHOOK, template);
