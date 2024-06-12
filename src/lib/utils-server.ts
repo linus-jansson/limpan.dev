@@ -24,12 +24,7 @@ export const getPgpPublicKey = async (): Promise<string> => {
 
 export const verifyCloudflareTurnstile = async (cf_verification_token : string) => {
     if (!cf_verification_token) {
-        return new Response('No token provided', {
-            status: 400,
-            headers: {
-                'content-type': 'text/plain'
-            }
-        })
+        return false
     }
 
     const res = await fetch(CF_VERIFY_URL, {

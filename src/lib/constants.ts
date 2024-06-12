@@ -11,3 +11,6 @@ export const RATE_LIMIT_DURATION = "1h";
 export const MESSAGE_SENT = "Message sent!";
 export const ERROR_SENDING_MESSAGE = "Error sending message, try again later";
 export const RATE_LIMIT_EXCEEDED = "Seems like you are sending too many messages, try again later";
+export const NO_UNIQUE_IDENTIFIER = ""
+export const CAPTCHEA_FAILED = "Captchea failed"
+export const INVALID_REQUEST = "Invalid Request"
