@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
-
+import fs from "fs";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
@@ -23,3 +23,4 @@ export function generateVibrantColor(): string {
 
     return colorDecimal.toString();
 }
+

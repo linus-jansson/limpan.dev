@@ -25,7 +25,7 @@ export function PopoutMenu() {
                     <li>
                         <Link className="tooltip tooltip-left"
                             data-tip="Contact"
-                            href="cnct"
+                            href="contact"
                         >
                             <Email/>
                             <span className="visually-hidden">Contact me on email</span>

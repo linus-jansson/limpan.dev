@@ -19,7 +19,7 @@ export async function sendMessage(formData: Record<string, any>): Promise<Messag
     "use server";
     // console.log(formData)
     const identifier = (headers().get('x-forwarded-for') ?? '127.0.0.1').split(',')[0];
-    const response = await fetch(HOST_URL + `/cnct/send?identifier=${identifier}`, {
+    const response = await fetch(HOST_URL + `/contact/send?identifier=${identifier}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

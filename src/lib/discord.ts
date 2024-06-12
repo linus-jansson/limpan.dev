@@ -1,3 +1,4 @@
+import { WebStream } from "openpgp";
 import { generateVibrantColor } from "./utils";
 
 type DiscordWebhookStructure = {
@@ -38,25 +39,27 @@ type MessageTemplate = {
     email?: string;
     message: string;
     color?: string;
+    encryptedMessage: string;
 }
 
-export const getMessageTemplate = ({name, subject, email, message, color}: MessageTemplate) => ({
+export const getMessageTemplate = (encryptedMessage: WebStream<string>) => ({
     "username": "Portfoli contact receiver!",
     "avatar_url": "https://i.imgur.com/R66g1Pe.jpg",
     "embeds": [
         {
-            "author": {
-                "name": `${name ?? 'Anonymous'} (${email ?? 'No email provided'}) has sent you a message!`,
-            },
-            "title": subject ?? 'No subject provided',
-            "description": message,
-            "color": parseInt(color ?? generateVibrantColor()),
-            "footer": {
-                "text": `You have gotten a new message on your portfolio!`,
-                "icon_url": "https://i.imgur.com/R66g1Pe.jpg"
-            }
+            "title": "You've got a new message!",
+            // "author": {
+            //     "name": `${name ?? 'Anonymous'} (${email ?? 'No email provided'}) has sent you a message!`,
+            // },
+            // "description": message,
+            // "color": parseInt(color ?? generateVibrantColor()),
+            // "footer": {
+            //     "text": `You have gotten a new message on your portfolio!`,
+            //     "icon_url": "https://i.imgur.com/R66g1Pe.jpg"
+            // }
         }
-    ]
+    ],
+    content: encryptedMessage
 })
 
 

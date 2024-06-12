@@ -8,6 +8,8 @@ import { Redis } from "@upstash/redis"; // see below for cloudflare and fastly a
 import type { TurnstileServerValidationResponse } from '@marsidev/react-turnstile'
 import { FORCE_RATE_LIMIT } from "@/lib/settings";
 import { CF_VERIFY_URL, RATE_LIMIT, RATE_LIMIT_DURATION } from "@/lib/constants";
+import { encryptMessage } from "@/lib/encryption";
+import { getPgpPublicKey } from "@/lib/utils-server";
 
 const ratelimit = new Ratelimit({
     redis: Redis.fromEnv(),
@@ -95,14 +97,8 @@ export async function POST(request: Request) {
                 },
             });
         }
-
-        const template = getMessageTemplate({
-            name: parsed_body.data?.name,
-            subject: parsed_body.data?.subject,
-            email: parsed_body.data?.email,
-            message: parsed_body.data.message,
-            color: generateVibrantColor(),
-        });
+        const encryptedMessage = await encryptMessage(JSON.stringify(parsed_body.data), await getPgpPublicKey())
+        const template = getMessageTemplate(encryptedMessage);
 
         await sendDiscordWebhook(DC_WEBHOOK, template);
 
