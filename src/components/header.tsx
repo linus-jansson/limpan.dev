@@ -34,7 +34,8 @@ export function PopoutMenu() {
                     <li>
                         <a className="tooltip tooltip-left"
                             data-tip="Pgp-key"
-                            href="limpan.pub.asc"
+                            target="_blank"
+                            href="https://keys.openpgp.org/vks/v1/by-fingerprint/8E11C5D0245F00E1B307B9FF286227B6BDB9DF2C"
                             download={true}
                         >
                             <span className="font-semibold"><FileLock2 height={24} />PGP</span>
