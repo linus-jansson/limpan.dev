@@ -24,3 +24,9 @@ export function generateVibrantColor(): string {
     return colorDecimal.toString();
 }
 
+export function pgpUpperBoundEstimation(keyLength: number, plaintextLength: number, overhead: number = 100): number {
+    const p = plaintextLength / 4;
+    return keyLength + Math.ceil(p * 4) + overhead;
+}
+
+export function encryptMessage = (message: string, publicKey: string): string => {
