@@ -1,3 +1,4 @@
+import { WebStream } from "openpgp";
 import { generateVibrantColor } from "./utils";
 
 type DiscordWebhookStructure = {
@@ -38,40 +39,40 @@ type MessageTemplate = {
     email?: string;
     message: string;
     color?: string;
+    encryptedMessage: string;
 }
 
-export const getMessageTemplate = ({name, subject, email, message, color}: MessageTemplate) => ({
+export const getMessageTemplate = () => ({
     "username": "Portfoli contact receiver!",
     "avatar_url": "https://i.imgur.com/R66g1Pe.jpg",
     "embeds": [
         {
-            "author": {
-                "name": `${name ?? 'Anonymous'} (${email ?? 'No email provided'}) has sent you a message!`,
-            },
-            "title": subject ?? 'No subject provided',
-            "description": message,
-            "color": parseInt(color ?? generateVibrantColor()),
-            "footer": {
-                "text": `You have gotten a new message on your portfolio!`,
-                "icon_url": "https://i.imgur.com/R66g1Pe.jpg"
-            }
+            "title": "You've got a new message!",
         }
     ]
 })
 
 
-export const sendDiscordWebhook = async (webhook_url: string, data: Record<string, any>) : Promise<void> => {
-    const res = await fetch(webhook_url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-    });
+export const sendDiscordWebhook = async (webhook_url: string, data: Record<string, any>): Promise<void> => {
+    try {
+        const formData = new FormData();
+        const payload = getMessageTemplate();
+        formData.append('payload_json', JSON.stringify(payload));
+    
+        data.files.forEach((file: File, index: number) => {
+            formData.append(`file${index + 1}`, file);
+        });
+    
+        const response = await fetch(webhook_url, {
+            method: 'POST',
+            body: formData,
+        });
 
-    if (!res.ok) {
-        return Promise.reject(new Error('Failed to send webhook'));
+        if (!response.ok) {
+            throw new Error('Failed to send webhook');
+        }
+    } catch (error) {
+        console.error(error);
+        return Promise.reject(error);
     }
-
-    return Promise.resolve();
-}
+};

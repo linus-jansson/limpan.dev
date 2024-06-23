@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
-
+import { PGP_PUBLIC_KEY_URL } from "./constants";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
@@ -22,4 +22,9 @@ export function generateVibrantColor(): string {
     const colorDecimal = (red << 16) + (green << 8) + blue;
 
     return colorDecimal.toString();
+}
+
+export async function getPublicPgpKey() {
+    const response = await fetch(PGP_PUBLIC_KEY_URL);
+    return response.text();
 }
