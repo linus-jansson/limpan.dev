@@ -14,3 +14,4 @@ export const RATE_LIMIT_EXCEEDED = "Seems like you are sending too many messages
 export const NO_UNIQUE_IDENTIFIER = ""
 export const CAPTCHEA_FAILED = "Captchea failed"
 export const INVALID_REQUEST = "Invalid Request"
+export const MESSAGE_TOO_LARGE = "File too large to send"

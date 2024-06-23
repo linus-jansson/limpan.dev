@@ -1,6 +1,5 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
-import fs from "fs";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
@@ -24,9 +23,8 @@ export function generateVibrantColor(): string {
     return colorDecimal.toString();
 }
 
-export function pgpUpperBoundEstimation(keyLength: number, plaintextLength: number, overhead: number = 100): number {
-    const p = plaintextLength / 4;
-    return keyLength + Math.ceil(p * 4) + overhead;
+export async function getPublicPgpKey() {
+    const PGP_PUBLIC_KEY_URL = "https://keys.openpgp.org/vks/v1/by-fingerprint/8E11C5D0245F00E1B307B9FF286227B6BDB9DF2C"
+    const response = await fetch(PGP_PUBLIC_KEY_URL);
+    return response.text();
 }
-
-export function encryptMessage = (message: string, publicKey: string): string => {
