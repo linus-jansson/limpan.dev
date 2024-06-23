@@ -1,5 +1,7 @@
 export const COOKIES_ACCEPTED_COOKIE = "cookies-accepted";
 
+export const PGP_PUBLIC_KEY_URL = "https://keys.openpgp.org/vks/v1/by-fingerprint/8E11C5D0245F00E1B307B9FF286227B6BDB9DF2C";
+
 export const CF_VERIFY_URL = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
 export const CF_SITE_KEY = "0x4AAAAAAAbHUo0eEimYDKYL";
 
