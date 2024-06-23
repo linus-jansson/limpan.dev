@@ -102,7 +102,7 @@ export async function submitContactForm(formData: Record<string, any>): Promise<
             }
         }
 
-        sendDiscordWebhook(DC_WEBHOOK, template);
+        await sendDiscordWebhook(DC_WEBHOOK, template);
 
         return {
             ok: true,
