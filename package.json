@@ -33,10 +33,10 @@
     "zod-form-data": "^2.0.2"
   },
   "devDependencies": {
-    "@openpgp/web-stream-tools": "0.0.11-patch-0",
     "@babel/preset-env": "^7.24.7",
     "@babel/preset-typescript": "^7.24.7",
     "@jest/globals": "^29.7.0",
+    "@openpgp/web-stream-tools": "0.0.11-patch-0",
     "@types/jest": "^29.5.12",
     "@types/node": "^20",
     "@types/qrcode": "^1.5.5",
