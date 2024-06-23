@@ -53,39 +53,26 @@ export const getMessageTemplate = () => ({
 })
 
 
-export const sendDiscordWebhook = async (webhook_url: string, data: Record<string, any>) : Promise<void> => {
-    let res;
-    if (data?.files) {
+export const sendDiscordWebhook = async (webhook_url: string, data: Record<string, any>): Promise<void> => {
+    try {
         const formData = new FormData();
-        let payload = getMessageTemplate();
+        const payload = getMessageTemplate();
         formData.append('payload_json', JSON.stringify(payload));
-        // Append each file correctly
+    
         data.files.forEach((file: File, index: number) => {
-            formData.append(`file${index+1}`, file);
+            formData.append(`file${index + 1}`, file);
         });
-
-        res = await fetch(webhook_url, {
+    
+        const response = await fetch(webhook_url, {
             method: 'POST',
             body: formData,
         });
-    }
-    else {
-        res = await fetch(webhook_url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        });
-    }
 
-
-    if (!res.ok) {
-        console.log(res)
-        const text = await res.text();
-        console.error(text);
-        return Promise.reject(new Error('Failed to send webhook'));
+        if (!response.ok) {
+            throw new Error('Failed to send webhook');
+        }
+    } catch (error) {
+        console.error(error);
+        return Promise.reject(error);
     }
-
-    return Promise.resolve();
-}
+};
