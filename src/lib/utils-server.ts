@@ -5,7 +5,6 @@ const CF_SECRET = process.env.CF_SECRET!;
 import { CF_VERIFY_URL, } from "@/lib/constants";
 import { TurnstileServerValidationResponse } from "@marsidev/react-turnstile";
 
-
 export const verifyCloudflareTurnstile = async (cf_verification_token : string) => {
     if (!cf_verification_token) {
         return false
