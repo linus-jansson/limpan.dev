@@ -1,7 +1,7 @@
 
 "use client";
 
-import { sendMessage } from "../server-actions";
+import { submitContactForm } from "../server-actions";
 import { useRef, useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -43,7 +43,7 @@ export function ContactForm({ cookiesAccepted }: { cookiesAccepted: boolean }) {
         setFormMessage("");
         setPostError(false);
 
-        sendMessage(values)
+        submitContactForm(values)
             .then((res) => {
                 if (!res.ok) {
                     setPostError(true);

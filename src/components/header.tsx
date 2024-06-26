@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Email, Github } from "./icons";
 import { FileLock2 } from "lucide-react";
+import { PGP_PUBLIC_KEY_URL } from "@/lib/constants";
 
 export function PopoutMenu() {
     return (
@@ -25,7 +26,7 @@ export function PopoutMenu() {
                     <li>
                         <Link className="tooltip tooltip-left"
                             data-tip="Contact"
-                            href="cnct"
+                            href="contact"
                         >
                             <Email/>
                             <span className="visually-hidden">Contact me on email</span>
@@ -34,7 +35,8 @@ export function PopoutMenu() {
                     <li>
                         <a className="tooltip tooltip-left"
                             data-tip="Pgp-key"
-                            href="limpan.pgp-key.asc"
+                            target="_blank"
+                            href={PGP_PUBLIC_KEY_URL}
                             download={true}
                         >
                             <span className="font-semibold"><FileLock2 height={24} />PGP</span>
