@@ -19,7 +19,7 @@ export const CookieBanner = ({cookiesAccepted}: {cookiesAccepted: boolean}) => {
 
     return (
         <div className="fixed bottom-0 left-0 right-0 p-8 border-t bg-base-100 border-border">
-            <div className="flex items-center justify-between container mx-auto flex flex-wrap space-y-4 md:space-y-0">
+            <div className="flex items-center justify-between container mx-auto flex-wrap space-y-4 md:space-y-0">
                 <div className="flex gap-4 items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-warning shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     <p className="text-sm text-muted-foreground">

@@ -117,30 +117,6 @@ export async function submitContactForm(formData: Record<string, any>): Promise<
         }
     }
 }
-export async function sendMessage(formData: Record<string, any>): Promise<MessageResponse> {
-    "use server";
-    // console.log(formData)
-    const identifier = (headers().get('x-forwarded-for') ?? '127.0.0.1').split(',')[0];
-    const response = await fetch(HOST_URL + `/contact/send?identifier=${identifier}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-    });
-    // check if rate limited 
-    if (!response.ok) {
-        return {
-            ok: false,
-            message: response.status === 429 ? RATE_LIMIT_EXCEEDED : ERROR_SENDING_MESSAGE,
-        };
-    }
-
-    return {
-        ok: true,
-        message: MESSAGE_SENT,
-    };
-}
 
 export async function acceptCookies() {
     "use server"
