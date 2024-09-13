@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-
+import { Analytics } from "@vercel/analytics/react"
 import { GeistSans } from 'geist/font/sans';
 export const metadata: Metadata = {
     title: 'Limpan | Software Developer Portfolio',
@@ -30,6 +30,7 @@ export default function RootLayout({
             <body className={cn(GeistSans.className, 'h-screen')}>
                 {children}
             </body>
+            <Analytics/>
         </html>
     );
 }
