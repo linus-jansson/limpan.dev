@@ -38,7 +38,8 @@ const ratelimit = new Ratelimit({
 
 export async function submitContactForm(formData: Record<string, any>): Promise<MessageResponse> {
   // Get request IP
-  const identifier = (headers().get('x-forwarded-for') ?? '127.0.0.1').split(',')[0];
+  const header = await headers();
+  const identifier = (header.get('x-forwarded-for') ?? '127.0.0.1').split(',')[0];
   if (!identifier) {
     return {
       ok: false,
