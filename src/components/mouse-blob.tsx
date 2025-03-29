@@ -200,7 +200,7 @@ export function MouseBlob({
 
   return (
     <div ref={wrapperRef} className="pointer-events-none fixed inset-0 z-0 flex items-center justify-center opacity-75">
-      <svg className="h-full w-full" viewBox={`0 0 ${window.innerWidth} ${window.innerHeight}`}>
+      <svg className="h-full w-full blur-3xl" viewBox={`0 0 ${window.innerWidth} ${window.innerHeight}`}>
         <defs>
           <linearGradient id="blob-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor={c1} />
@@ -208,7 +208,7 @@ export function MouseBlob({
             <stop offset="100%" stopColor={c3} />
           </linearGradient>
         </defs>
-        <path ref={blobRef} fill="url(#blob-gradient)" filter="blur(69px)" />
+        <path ref={blobRef} fill="url(#blob-gradient)" />
       </svg>
     </div>
   )
