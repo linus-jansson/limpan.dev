@@ -16,12 +16,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Limpan | Software Developer Portfolio',
-  description: 'Get to know Limpan, a software developer from Sweden. Check what what I’m currently working on!',
+  title: 'Limpan | A Swedish Software Developer',
+  description: 'Meet Limpan, a software developer from Sweden. I share my latest hobby projects and what I’m currently building. Take a look around!',
   openGraph: {
       type: 'website',
-      title: 'Limpan - Software Developer | Sweden',
-      description: 'Get to know Limpan, a software developer from Sweden. Check what what I’m currently working on!',
+      siteName: 'Limpan | A Swedish Software Developer',
+      title: 'Limpan | A Swedish Software Developer',
+      description: 'Meet Limpan, a software developer from Sweden. I share my latest hobby projects and what I’m currently building. Take a look around!',
       url: 'https://limpan.dev/',
       images: 'https://limpan.dev/bg.png',
   },
