@@ -1,6 +1,6 @@
 "use client";
 
-import { MouseBlob } from "@/components/mouse-blob";
+import { MouseBlob } from "@/components/blob/mouse-blob";
 import { useMobile } from "@/hooks/use-mobile";
 import { useState, useEffect } from "react";
 
