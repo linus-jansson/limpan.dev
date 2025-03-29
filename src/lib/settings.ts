@@ -1,1 +1,0 @@
-export const FORCE_RATE_LIMIT = process.env.FORCE_RATE_LIMIT === "true";

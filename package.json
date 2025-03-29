@@ -6,52 +6,31 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "test": "jest"
+    "lint": "next lint"
   },
   "dependencies": {
-    "@hookform/resolvers": "^3.4.2",
-    "@marsidev/react-turnstile": "^0.7.1",
-    "@radix-ui/react-label": "^2.0.2",
-    "@radix-ui/react-slot": "^1.0.2",
-    "@upstash/ratelimit": "^1.1.3",
-    "@upstash/redis": "^1.31.6",
-    "@vercel/analytics": "^1.3.1",
-    "class-variance-authority": "^0.7.0",
+    "@vercel/analytics": "^1.5.0",
+    "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "geist": "^1.3.0",
-    "lucide-react": "^0.399.0",
+    "lucide-react": "^0.485.0",
     "next": "15.2.4",
-    "openpgp": "^5.11.1",
-    "qrcode": "^1.5.3",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "react-hook-form": "^7.51.5",
-    "server-only": "^0.0.1",
-    "tailwind-merge": "^2.3.0",
-    "tailwindcss-animate": "^1.0.7",
-    "uuid": "^9.0.1",
-    "zod": "^3.23.8",
-    "zod-form-data": "^2.0.2"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-icons": "^5.5.0",
+    "tailwind-merge": "^3.0.2",
+    "tw-animate-css": "^1.2.5",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
-    "@openpgp/web-stream-tools": "0.0.11-patch-0",
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
-    "@types/qrcode": "^1.5.5",
-    "@types/react": "19.0.12",
-    "@types/react-dom": "19.0.4",
-    "daisyui": "^4.10.1",
-    "eslint": "^8",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
     "eslint-config-next": "15.2.4",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
+    "tailwindcss": "^4",
     "typescript": "^5"
   },
-  "packageManager": "pnpm@9.2.0+sha512.98a80fd11c2e7096747762304106432b3ddc67dcf54b5a8c01c93f68a2cd5e05e6821849522a06fb76284d41a2660d5e334f2ee3bbf29183bf2e739b1dafa771",
-  "pnpm": {
-    "overrides": {
-      "@types/react": "19.0.12",
-      "@types/react-dom": "19.0.4"
-    }
-  }
+  "packageManager": "pnpm@10.7.0+sha512.6b865ad4b62a1d9842b61d674a393903b871d9244954f652b8842c2b553c72176b278f64c463e52d40fff8aba385c235c8c9ecf5cc7de4fd78b8bb6d49633ab6"
 }
