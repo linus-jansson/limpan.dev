@@ -1,8 +1,9 @@
 import { BlobProvider } from "@/components/blob";
 import { Card } from "@/components/card";
+import { cn } from "@/lib/utils";
 import React from "react";
 import { FaArrowDown, FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
-
+import styles from "./page.module.css"
 
 const SocialLinks = () => {
   return (
@@ -22,7 +23,7 @@ const SocialLinks = () => {
 
 const ScrollIndicator = () => {
   return (
-    <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2">
+    <div className={cn("absolute left-1/2 transform -translate-x-1/2", styles.downIndicatorPosition)}>
       <a className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center" href="#main">
         {/* <div className="w-2 h-2 rounded-full bg-white animate-bounce" /> */}
         <FaArrowDown className="animate-bounce"/>
