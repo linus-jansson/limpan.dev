@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/react"
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Footer } from "@/components/Layout/Footer";
+import type { Viewport } from 'next'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,6 +15,10 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+export const viewport: Viewport = {
+  viewportFit: 'cover',
+}
 
 export const metadata: Metadata = {
   title: 'Limpan | A Swedish Software Developer',
@@ -31,7 +36,6 @@ export const metadata: Metadata = {
       'apple-mobile-web-app-capable': 'true',
       'apple-mobile-web-app-status-bar-style': 'black-translucent',
   },
-  viewport: "width=device-width, initial-scale=1, viewport-fit=cover"
 };
 
 export default function RootLayout({
