@@ -6,7 +6,7 @@ type CardProps = {
   body: string;
 } & React.RefAttributes<HTMLDivElement>;
 
-export const Card = React.forwardRef<HTMLDivElement, CardProps>(({ title, body }, ref) => {
+const Card = React.forwardRef<HTMLDivElement, CardProps>(({ title, body }, ref) => {
   return (
     <div
       ref={ref}
@@ -17,3 +17,6 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(({ title, body }
     </div>
   );
 });
+
+Card.displayName = "Card";
+export {Card};
