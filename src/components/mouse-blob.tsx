@@ -199,8 +199,8 @@ export function MouseBlob({
   }, [position, rotation, time, baseRadius, windowSize])
 
   return (
-    <div ref={wrapperRef} className="pointer-events-none fixed inset-0 z-0 flex items-center justify-center opacity-75">
-      <svg className="h-full w-full blur-3xl" viewBox={`0 0 ${window.innerWidth} ${window.innerHeight}`}>
+    <div ref={wrapperRef} className="pointer-events-none fixed inset-0 z-0 flex items-center justify-center opacity-75 will-change-auto duration-500 blur-3xl">
+      <svg className="h-full w-full" viewBox={`0 0 ${window.innerWidth} ${window.innerHeight}`}>
         <defs>
           <linearGradient id="blob-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor={c1} />
