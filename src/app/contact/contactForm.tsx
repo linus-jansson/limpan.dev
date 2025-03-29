@@ -27,7 +27,7 @@ import { cn } from "@/lib/utils";
 import { CF_SITE_KEY } from "@/lib/constants";
 
 export function ContactForm({ cookiesAccepted }: { cookiesAccepted: boolean }) {
-    const turnstileRef = useRef()
+    const turnstileRef = useRef(null)
     const [isSending, setIsSending] = useState(false)
     const [formMessage, setFormMessage] = useState<null | string>(null)
     const [postError, setPostError] = useState<boolean>(false)
