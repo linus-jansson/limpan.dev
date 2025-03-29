@@ -24,7 +24,7 @@ export const BlobProvider = ({}) => {
     }
   }, [])
 
-  if (!isMounted || isMobile) return null;
+  if (!isMounted) return null;
 
-  return (<MouseBlob mousePosition={mousePosition} />);
+  return (<MouseBlob mousePosition={mousePosition} followMouse={!isMobile} />);
 }

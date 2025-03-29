@@ -21,10 +21,10 @@ const cyrb53 = (str: string, seed = 0) => {
   return 4294967296 * (2097151 & h2) + (h1 >>> 0);
 };
 
-export function getSeededRGB(seed: any = Math.random()) {
+export function getSeededRGB(seed: number | string | string[] = Math.random()) {
   const hash = cyrb53(seed.toString());
   const r = (hash & 0xFF0000) >> 16;
   const g = (hash & 0x00FF00) >> 8;
   const b = hash & 0x0000FF;
-  return `rgb(${r},${g},${b})`;
+  return `rgb(${r},${g},${b}, 0.25)`;
 }
