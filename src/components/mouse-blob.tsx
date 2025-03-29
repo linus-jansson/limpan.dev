@@ -1,20 +1,15 @@
 "use client"
 
+import { getSeededRGB } from "@/lib/utils";
 import { useEffect, useMemo, useRef, useState } from "react"
-
+import { v5 as uuid } from "uuid";
 interface MouseBlobProps {
   mousePosition: { x: number; y: number },
   followMouse?: boolean
 }
 
-function getRandomRGB() {
-  const r = Math.floor(Math.random() * 256); // 0–255
-  const g = Math.floor(Math.random() * 256);
-  const b = Math.floor(Math.random() * 256);
-  return `rgb(${r}, ${g}, ${b}, 0.5)`;
-}
-
-
+const d = new Date()
+const MonthDay = `${d.getMonth()}${d.getDate()}`
 
 export function MouseBlob({ mousePosition, followMouse }: MouseBlobProps) {
   const blobRef = useRef<SVGPathElement>(null)
@@ -23,17 +18,16 @@ export function MouseBlob({ mousePosition, followMouse }: MouseBlobProps) {
   const [rotation, setRotation] = useState(0)
   const [time, setTime] = useState(0)
   const animationRef = useRef<number>(null)
-
-  const c1 = useMemo(() => getRandomRGB(), []);
-  const c2 = useMemo(() => getRandomRGB(), []);
-  const c3 = useMemo(() => getRandomRGB(), []);
-
+  const c1 = useMemo(() => getSeededRGB(MonthDay), []);
+  const c2 = useMemo(() => getSeededRGB(MonthDay), []);
+  const c3 = useMemo(() => getSeededRGB(MonthDay), []);
   // Lerp function for smooth interpolation
   const lerp = (start: number, end: number, factor: number) => {
     return start + (end - start) * factor
   }
 
   useEffect(() => {
+
     // Initialize position to mouse position on first render
     if (position.x === 0 && position.y === 0) {
       setPosition({ x: mousePosition.x, y: mousePosition.y })
