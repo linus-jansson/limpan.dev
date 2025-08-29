@@ -24,7 +24,7 @@
     "next": "15.2.4",
     "openpgp": "^5.11.1",
     "qrcode": "^1.5.3",
-    "react": "19.1.0",
+    "react": "19.1.1",
     "react-dom": "19.1.0",
     "react-hook-form": "^7.51.5",
     "server-only": "^0.0.1",
