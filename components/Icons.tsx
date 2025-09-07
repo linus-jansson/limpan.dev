@@ -1,11 +1,11 @@
 export const Github = () => (
     <svg
-        className="w-6 h-6"
+      className="w-6 h-6"
       viewBox="0 0 16 16"
       width="32"
       height="32"
-      aria-hidden="true"
     >
+      <title>Github logo</title>
       <path
         fillRule="evenodd"
         fill="currentColor"
@@ -19,24 +19,14 @@ export const Github = () => (
       />
     </svg>
 );
-  
 
-
-export const Email = () => (
-    <svg
-        className="w-6 h-6"
-      viewBox="0 0 24 24"
-      width="24"
-      height="24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect>
-      <path d="M22,6l-10,7L2,6"></path>
+export const Pgp = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <title>PGP lock icon</title>
+      <path d="M4 22h14a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v1"></path>
+      <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+      <rect width="8" height="5" x="2" y="13" rx="1"></rect>
+      <path d="M8 13v-2a2 2 0 1 0-4 0v2"></path>
     </svg>
   );
   
