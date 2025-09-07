@@ -41,6 +41,7 @@ export function Blob({
   const [time, setTime] = useState(0)
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 })
   const [isMounted, setIsMounted] = useState(false)
+  const [isIOS, setIsIOS] = useState(false)
   const animationRef = useRef<number>(null)
 
   const calculateBaseRadius = () => {
@@ -58,6 +59,15 @@ export function Blob({
   const lerp = (start: number, end: number, factor: number) => {
     return start + (end - start) * factor
   }
+    useEffect(() => {
+    const detectIOS = () => {
+      return (
+        /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+        (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
+      )
+    }
+    setIsIOS(detectIOS())
+  }, [])
 
   useEffect(() => {
     if (!enabled || !followMouse) return
@@ -216,6 +226,52 @@ export function Blob({
 
   if (!enabled || !isMounted) return null
 
+  if (isIOS) {
+    return (
+      <div
+        ref={wrapperRef}
+        className={`pointer-events-none fixed inset-0 flex items-center justify-center ${className}`}
+        style={{ zIndex }}
+      >
+        {/* Multiple layers for iOS blur effect */}
+        <div
+          className="absolute rounded-full"
+          style={{
+            width: `${baseRadius * 2.5}px`,
+            height: `${baseRadius * 2.5}px`,
+            background: `radial-gradient(circle, ${colors[0]}, ${colors[1]}, ${colors[2]})`,
+            opacity: opacity * 0.3,
+            filter: "blur(20px)",
+            transform: `translate(${position.x - windowSize.width / 2}px, ${position.y - windowSize.height / 2}px)`,
+          }}
+        />
+        <div
+          className="absolute rounded-full"
+          style={{
+            width: `${baseRadius * 2}px`,
+            height: `${baseRadius * 2}px`,
+            background: `radial-gradient(circle, ${colors[1]}, ${colors[2]}, ${colors[0]})`,
+            opacity: opacity * 0.4,
+            filter: "blur(15px)",
+            transform: `translate(${position.x - windowSize.width / 2}px, ${position.y - windowSize.height / 2}px) rotate(${rotation}rad)`,
+          }}
+        />
+        <div
+          className="absolute rounded-full"
+          style={{
+            width: `${baseRadius * 1.5}px`,
+            height: `${baseRadius * 1.5}px`,
+            background: `radial-gradient(circle, ${colors[2]}, ${colors[0]}, ${colors[1]})`,
+            opacity: opacity * 0.5,
+            filter: "blur(10px)",
+            transform: `translate(${position.x - windowSize.width / 2}px, ${position.y - windowSize.height / 2}px) rotate(${-rotation}rad)`,
+          }}
+        />
+      </div>
+    )
+  }
+
+  // Standard SVG approach for other browsers
   return (
     <div
       ref={wrapperRef}
@@ -230,8 +286,16 @@ export function Blob({
             <stop offset="50%" stopColor={colors[1]} />
             <stop offset="100%" stopColor={colors[2]} />
           </linearGradient>
+          <filter id={`blob-blur-${zIndex}`}>
+            <feGaussianBlur in="SourceGraphic" stdDeviation={blur / 3} />
+          </filter>
         </defs>
-        <path ref={blobRef} fill={`url(#blob-gradient-${zIndex})`} filter={`blur(${blur}px)`} style={{ opacity }} />
+        <path
+          ref={blobRef}
+          fill={`url(#blob-gradient-${zIndex})`}
+          filter={`url(#blob-blur-${zIndex})`}
+          style={{ opacity }}
+        />
       </svg>
     </div>
   )
