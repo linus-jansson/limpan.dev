@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/.well-known/:path*",
+      "destination": "/.well-known/:path*",
+      "permanent": false
+    },
+    {
+      "source": "/:path((?!\\.well-known/).*)",
+      "destination": "https://www.limpan.dev/:path",
+      "permanent": true
+    }
+  ]
+}
