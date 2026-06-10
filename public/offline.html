@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Offline | Limpan</title>
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #020617;
+        color: #fff;
+        font-family: Arial, Helvetica, sans-serif;
+        padding: 2rem;
+        text-align: center;
+      }
+
+      .blob {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 0;
+      }
+
+      .blob::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%);
+        border-radius: 50%;
+      }
+
+      .content {
+        position: relative;
+        z-index: 10;
+        max-width: 36rem;
+      }
+
+      h1 {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+      }
+
+      p {
+        font-size: 1.125rem;
+        opacity: 0.8;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+      }
+
+      .icon {
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+        display: block;
+      }
+
+      button {
+        border-radius: 9999px;
+        border: 1px solid #fff;
+        background: transparent;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 500;
+        color: #fff;
+        cursor: pointer;
+        transition: transform 0.15s;
+      }
+
+      button:hover { transform: scale(1.05); }
+    </style>
+  </head>
+  <body>
+    <div class="blob"></div>
+    <div class="content">
+      <span class="icon">📡</span>
+      <h1>You're offline</h1>
+      <p>Looks like you lost your internet connection. Check your network and try again.</p>
+      <button onclick="location.reload()">Try again</button>
+    </div>
+  </body>
+</html>
